@@ -10,20 +10,18 @@ class Calculate
       team_rpi = opts[:team_rpi] || 100
       min_games = opts[:min_games] || 0
 
-      DB[%Q| select  p.id as id,
-                      p.name as player,
-                      p.drafted as drafted,
-                      s.name as team,
-                      s.rpi as team_rpi,
-                      avg(b.points) as points,
-                      count(b.points) as games
-              from boxscores b
-              inner join teams t on t.id = b.opponent_id and t.rpi <= #{opponent_rpi}
-              inner join players p on p.id = b.player_id
-              inner join teams s on s.id = p.team_id and s.rpi <= #{team_rpi}
-              group by p.name, p.drafted, s.name
-              having count(b.points) > #{min_games}
-              order by avg(b.points) desc|]
+      DB[:boxscores].select(:players__id.as(:id),
+                            :players__name.as(:player),
+                            :players__drafted.as(:drafted),
+                            :teams__name.as(:team),
+                            :teams__rpi.as(:team_rpi)).
+                    select_more{[avg(:boxscores__points).as(:points), count(:boxscores__points).as(:games)]}.
+                    join(:teams, {:id => :opponent_id}, {:table_alias => :opponents}) {|o,b,js| :rpi.qualify(o) <= 100}.
+                    join(:players, :id => :boxscores__player_id).
+                    join(:teams, {:id => :players__team_id}) {|t,b,js| :rpi.qualify(t) <= 100}.
+                    group(:players__name, :players__drafted, :teams__name).
+                    having{count(:boxscores__points) >= 10}.
+                    order{avg(:boxscores__points).desc}
     end
 
     def draft player_id
