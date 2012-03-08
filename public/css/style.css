@@ -1,0 +1,19 @@
+tr {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+th, td {
+  text-align: left;
+  min-width: 100px;
+}
+
+.even {
+  background: #DDD;
+}
+
+.drafted {
+  color: red;
+  text-decoration: line-through;
+}

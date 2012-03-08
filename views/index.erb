@@ -1,0 +1,35 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+  <table>
+    <thead>
+      <th>Player</th>
+      <th>Team</th>
+      <th>Points</th>
+      <th>Games</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @ppg.each_with_index do |result, idx| %>
+        <tr id="<%= result[:id] %>" class="<%= idx % 2 == 0  ? 'even' : 'odd' %><%= " drafted" if result[:drafted] %>">
+          <td><%= "#{idx + 1}. #{result[:player]}" %></td>
+          <td><%= "#{result[:team_rpi]} #{result[:team]}" %></td>
+          <td><%= sprintf("%0.3f", result[:points]) %></td>
+          <td><%= result[:games] %></td>
+          <td>
+            <% unless result[:drafted] %>
+              <form class= "draft" action="draft" method="post">
+                <input type="hidden" name="player_id" value=<%= result[:id] %> />
+                <input type="submit" value="draft" />
+              </form>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>
+</html> 
