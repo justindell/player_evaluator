@@ -1,12 +1,16 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script language="javascript" type="text/javascript" src="/javascripts/jquery-1.7.1.min.js" ></script>
+  <script language="javascript" type="text/javascript" src="/javascripts/jquery-ui-1.8.18.custom.min.js" ></script>
 </head>
 <body>
   <table>
     <thead>
       <th>Player</th>
+      <th>RPI</th>
       <th>Team</th>
       <th>Points</th>
       <th>Games</th>
@@ -16,7 +20,8 @@
       <% @ppg.each_with_index do |result, idx| %>
         <tr id="<%= result[:id] %>" class="<%= idx % 2 == 0  ? 'even' : 'odd' %><%= " drafted" if result[:drafted] %>">
           <td><%= "#{idx + 1}. #{result[:player]}" %></td>
-          <td><%= "#{result[:team_rpi]} #{result[:team]}" %></td>
+          <td><%= result[:team_rpi] %></td>
+          <td><%= "(#{result[:seed]}) #{result[:team]}" %></td>
           <td><%= sprintf("%0.3f", result[:points]) %></td>
           <td><%= result[:games] %></td>
           <td>
@@ -31,5 +36,39 @@
       <% end %>
     </tbody>
   </table>
+  <div id='query'>
+    <form action="/" method="get">
+      Opponent RPI: <input type="text" name="opponent_rpi" /><br />
+      Team RPI: <input type="text" name="team_rpi" /><br />
+      Min Games: <input type="text" name="min_games" /><br />
+      Seed: <input type="text" name="seed" /><br />
+      Team Name: <input type="text" id="team_names" name="team_name" /><br />
+      <input type="hidden" id="team_id" name="team_id" />
+      <input type="submit" value="Search" />
+    </form>
+  </div>
 </body>
+<script language="javascript" type="text/javascript">
+  $(function() {
+    $.ajax({
+      url: "/teams",
+      dataType: "json",
+      success: function(response){
+        var data = $.map(response, function(item) {
+          return {
+            value: item.name,
+            id: item.id
+          }; 
+        });
+        $('#team_names').autocomplete({
+          source: data,
+          minLength: 1,
+          select: function(event, ui) {
+            $('#team_id').attr('value', ui.item.id);
+          }  
+        });
+      }  
+    });
+  });
+</script>
 </html> 

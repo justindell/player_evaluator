@@ -1,3 +1,7 @@
+table {
+  margin: 20px 0px 0px 20px;
+}
+
 tr {
   border: none;
   margin: 0px;
@@ -6,7 +10,7 @@ tr {
 
 th, td {
   text-align: left;
-  min-width: 100px;
+  padding-right: 5px;
 }
 
 .even {
@@ -16,4 +20,16 @@ th, td {
 .drafted {
   color: red;
   text-decoration: line-through;
+}
+
+#query {
+  position: fixed;
+  border: double black;
+  left: 800px;
+  top: 30px;
+  padding: 20px;
+}
+
+.ui-menu-item {
+  font-size: 14px;
 }
