@@ -1,0 +1,20 @@
+th, td {
+  min-width: 50px;
+}
+
+.drafted {
+  color: red;
+  text-decoration: line-through;
+}
+
+#query {
+  position: fixed;
+  border: double black;
+  left: 800px;
+  top: 30px;
+  padding: 20px;
+}
+
+.ui-menu-item {
+  font-size: 14px;
+}

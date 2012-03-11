@@ -8,7 +8,6 @@ class Calculate
       puts opts.inspect
       format = "%-40s%-40s%0.4f    %s\n"
       opponent_rpi = blank?(opts['opponent_rpi']) ? 100 : opts['opponent_rpi']
-      team_rpi = blank?(opts['team_rpi']) ? 100 : opts['team_rpi']
       min_games = blank?(opts['min_games']) ? 0 : opts['min_games']
 
       query = DB[:boxscores].select(:players__id.as(:id),
@@ -21,11 +20,11 @@ class Calculate
                             join(:teams, {:id => :opponent_id}, {:table_alias => :opponents}) {|o,b,js| :rpi.qualify(o) <= opponent_rpi}.
                             join(:players, :id => :boxscores__player_id).
                             group(:players__name, :players__drafted, :teams__name).
-                            having{count(:boxscores__points) >= min_games}.
+                            having{count(:boxscores__points) >= min_games.to_i}.
                             order{avg(:boxscores__points).desc}
       query = if blank?(opts['team_id'])
                 if blank?(opts['seed'])
-                  query.join(:teams, :id => :players__team_id) {|t,b,js| :rpi.qualify(t) <= team_rpi}
+                  query.join(:teams, :id => :players__team_id) {|t,b,js| :seed.qualify(t) <= 16}
                 else
                   query.join(:teams, :id => :players__team_id) {|t,b,js| :seed.qualify(t) <= opts['seed']}
                 end
@@ -34,6 +33,12 @@ class Calculate
               end
       puts query.inspect
       query
+    end
+
+    def expected_wins seed
+      results = DB[:seed_results].filter(:seed => seed).first
+      pct = results[:wins] / (results[:wins] + results[:losses]).to_f
+      return pct*(pct*(pct*(pct*(pct*(pct + 6) - 5*pct + 5) - 4*pct + 4) - 3*pct + 3) - 2*pct + 2) - pct*(pct - 1)
     end
 
     def draft player_id

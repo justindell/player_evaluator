@@ -2,28 +2,34 @@
 <head>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script language="javascript" type="text/javascript" src="/javascripts/jquery-1.7.1.min.js" ></script>
   <script language="javascript" type="text/javascript" src="/javascripts/jquery-ui-1.8.18.custom.min.js" ></script>
+  <script language="javascript" type="text/javascript" src="/javascripts/jquery-tablesorter.min.js" ></script>
 </head>
 <body>
-  <table>
+  <table id="players" class="tablesorter">
     <thead>
       <th>Player</th>
       <th>RPI</th>
       <th>Team</th>
       <th>Points</th>
+      <th>ExPts</th>
       <th>Games</th>
+      <th>ExGames</th>
       <th></th>
     </thead>
     <tbody>
       <% @ppg.each_with_index do |result, idx| %>
-        <tr id="<%= result[:id] %>" class="<%= idx % 2 == 0  ? 'even' : 'odd' %><%= " drafted" if result[:drafted] %>">
+        <tr id="<%= result[:id] %>" class="<%= " drafted" if result[:drafted] %>">
           <td><%= "#{idx + 1}. #{result[:player]}" %></td>
           <td><%= result[:team_rpi] %></td>
           <td><%= "(#{result[:seed]}) #{result[:team]}" %></td>
           <td><%= sprintf("%0.3f", result[:points]) %></td>
+          <td><%= sprintf("%0.3f", (@wins_per_seed[result[:seed]] + 1) * result[:points]) %></td>
           <td><%= result[:games] %></td>
+          <td><%= sprintf("%0.3f", @wins_per_seed[result[:seed]] + 1) %></td>
           <td>
             <% unless result[:drafted] %>
               <form class= "draft" action="draft" method="post">
@@ -49,6 +55,9 @@
   </div>
 </body>
 <script language="javascript" type="text/javascript">
+  $(document).ready(function() { 
+    $("#players").tablesorter({headers: { 7: { sorter: false }}});
+  });
   $(function() {
     $.ajax({
       url: "/teams",
