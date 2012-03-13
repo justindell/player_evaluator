@@ -2,6 +2,12 @@ require 'sinatra'
 require 'json'
 require './calculate'
 
+class NilClass
+  def empty?
+    true
+  end
+end
+
 set(:css_dir) { File.join(views, 'css') }
 
 get '/' do

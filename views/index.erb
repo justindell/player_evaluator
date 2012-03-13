@@ -44,11 +44,12 @@
   </table>
   <div id='query'>
     <form action="/" method="get">
-      Opponent RPI: <input type="text" name="opponent_rpi" /><br />
-      Team RPI: <input type="text" name="team_rpi" /><br />
-      Min Games: <input type="text" name="min_games" /><br />
-      Seed: <input type="text" name="seed" /><br />
-      Team Name: <input type="text" id="team_names" name="team_name" /><br />
+    Opponent RPI: <input type="text" name="opponent_rpi" <% unless params[:opponent_rpi].empty? %>value="<%= params[:opponent_rpi] %>"<% end %>/><br />
+    Team RPI: <input type="text" name="team_rpi" <% unless params[:team_rpi].empty? %>value="<%= params[:team_rpi] %>"<% end %>/><br />
+    Min Games: <input type="text" name="min_games" <% unless params[:min_games].empty? %>value="<%= params[:min_games] %>"<% end %>/><br />
+    Seed: <input type="text" name="seed" <% unless params[:seed].empty? %>value="<%= params[:seed] %>"<% end %>/><br />
+    Team Name: <input type="text" id="team_names" name="team_name" <% unless params[:team_name].empty? %>value="<%= params[:team_name] %>"<% end %>/><br />
+    Hide Drafted? <input type="checkbox" name="hide_drafted" <% unless params[:hide_drafted].empty? %>checked="true"<% end %>/><br />
       <input type="hidden" id="team_id" name="team_id" />
       <input type="submit" value="Search" />
     </form>
