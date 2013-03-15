@@ -27,9 +27,9 @@
           <td><%= result[:team_rpi] %></td>
           <td><%= "(#{result[:seed]}) #{result[:team]}" %></td>
           <td><%= sprintf("%0.3f", result[:points]) %></td>
-          <td><%= sprintf("%0.3f", (@wins_per_seed[result[:seed]] + 1) * result[:points]) %></td>
+          <td><%= sprintf("%0.3f", result[:expected_points]) %></td>
           <td><%= result[:games] %></td>
-          <td><%= sprintf("%0.3f", @wins_per_seed[result[:seed]] + 1) %></td>
+          <td><%= sprintf("%0.3f", @games_per_seed[result[:seed]]) %></td>
           <td>
             <% unless result[:drafted] %>
               <form class= "draft" action="draft" method="post">

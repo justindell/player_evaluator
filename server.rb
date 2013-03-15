@@ -11,13 +11,14 @@ end
 set(:css_dir) { File.join(views, 'css') }
 
 get '/' do
+  @games_per_seed = {}
   @ppg = Calculate.points_per_game(params).all
-  @wins_per_seed = {}
-  @wins_per_seed[nil] = 0
-  #@actual = Calculate.actual_points
-  (1..16).each {|seed| @wins_per_seed[seed] = Calculate.expected_wins(seed)}
-  @ppg.each {|p| p[:expected_points] = (@wins_per_seed[p[:seed]] + 1) * p[:points]}
+  wins = Calculate.expected_wins
+
+  (1..16).each {|seed| @games_per_seed[seed] = wins.select{|w| w[:seed] == seed}.first[:average_wins] + 1}
+  @ppg.each {|p| p[:expected_points] = @games_per_seed[p[:seed]] * p[:points]}
   @ppg.sort!{|a,b| b[:expected_points] <=> a[:expected_points]}
+
   erb :index
 end
 

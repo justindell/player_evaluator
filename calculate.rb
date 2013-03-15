@@ -2,11 +2,9 @@ require 'sequel'
 
 class Calculate
   DB = Sequel.sqlite('players.sqlite')
-  #ACTUAL = Sequel.sqlite('actual.sqlite3')
 
   class << self
     def points_per_game opts = {}
-      format = "%-40s%-40s%0.4f    %s\n"
       opponent_rpi = opts['opponent_rpi'].empty? ? 100 : opts['opponent_rpi']
       min_games = opts['min_games'].empty? ? 0 : opts['min_games']
       seed = opts['seed'].empty? ? 16 : opts['seed']
@@ -30,16 +28,11 @@ class Calculate
                     where(draft_filter)
     end
 
-    def expected_wins seed
-      DB[:seed_results].filter(:seed => seed).first[:average_wins]
+    def expected_wins
+      DB[:seed_results].all
     end
 
-    #def actual_points
-      #ACTUAL[:players].join(:boxscores, :player_id => :id).select(:players__first_name, :players__last_name, :SUM.sql_function(:points).as(:sum)).group(:players__first_name, :players__last_name).all
-    #end
-
     def draft player_id
-      puts "drafting #{player_id}"
       DB[:players].filter(:id => player_id).update(:drafted => true)
     end
 
