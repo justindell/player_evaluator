@@ -2,6 +2,7 @@ require 'sequel'
 
 class Calculate
   DB = Sequel.sqlite('players.sqlite')
+  #ACTUAL = Sequel.sqlite('actual.sqlite3')
 
   class << self
     def points_per_game opts = {}
@@ -41,6 +42,10 @@ class Calculate
       pct = results[:wins] / (results[:wins] + results[:losses]).to_f
       return pct*(pct*(pct*(pct*(pct*(pct + 6) - 5*pct + 5) - 4*pct + 4) - 3*pct + 3) - 2*pct + 2) - pct*(pct - 1)
     end
+
+    #def actual_points
+      #ACTUAL[:players].join(:boxscores, :player_id => :id).select(:players__first_name, :players__last_name, :SUM.sql_function(:points).as(:sum)).group(:players__first_name, :players__last_name).all
+    #end
 
     def draft player_id
       puts "drafting #{player_id}"

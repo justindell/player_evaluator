@@ -3,10 +3,10 @@
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
   <script language="javascript" type="text/javascript" src="/javascripts/jquery-1.7.1.min.js" ></script>
   <script language="javascript" type="text/javascript" src="/javascripts/jquery-ui-1.8.18.custom.min.js" ></script>
   <script language="javascript" type="text/javascript" src="/javascripts/jquery-tablesorter.min.js" ></script>
+  <script language="javascript" type="text/javascript" src="/javascripts/jquery.heatcolor.0.0.1.pack.js" ></script>
 </head>
 <body>
   <table id="players" class="tablesorter">
@@ -56,9 +56,21 @@
   </div>
 </body>
 <script language="javascript" type="text/javascript">
+  function sortwithcolor( column ) {
+    $("#players > tbody > tr").heatcolor(
+      function() { return $("td:nth-child(" + column + ")", this).text(); }
+    );
+  }
+
   $(document).ready(function() { 
     $("#players").tablesorter({headers: { 7: { sorter: false }}});
+    sortwithcolor(5);
+    $("th").click(function() {
+      $(this).siblings().css("background-color","#cccccc").end().css("background-color","#dd0000");
+      sortwithcolor( $(this).parent().children().index( this ) + 1 );
+    });
   });
+
   $(function() {
     $.ajax({
       url: "/teams",
