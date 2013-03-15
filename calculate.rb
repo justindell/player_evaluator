@@ -6,7 +6,6 @@ class Calculate
 
   class << self
     def points_per_game opts = {}
-      puts opts.inspect
       format = "%-40s%-40s%0.4f    %s\n"
       opponent_rpi = opts['opponent_rpi'].empty? ? 100 : opts['opponent_rpi']
       min_games = opts['min_games'].empty? ? 0 : opts['min_games']
@@ -33,7 +32,6 @@ class Calculate
               end
       query = query.join(:players, :id => :boxscores__player_id)
       query = query.filter(~{:players__drafted => true}) if opts['hide_drafted']
-      puts query.inspect
       query
     end
 
