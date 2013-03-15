@@ -36,9 +36,7 @@ class Calculate
     end
 
     def expected_wins seed
-      results = DB[:seed_results].filter(:seed => seed).first
-      pct = results[:wins] / (results[:wins] + results[:losses]).to_f
-      return pct*(pct*(pct*(pct*(pct*(pct + 6) - 5*pct + 5) - 4*pct + 4) - 3*pct + 3) - 2*pct + 2) - pct*(pct - 1)
+      DB[:seed_results].filter(:seed => seed).first[:average_wins]
     end
 
     #def actual_points
