@@ -25,6 +25,8 @@ table.tablesorter {
 	margin:10px 0pt 15px;
 	font-size: 10pt;
 	text-align: left;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 	background-color: #e6EEEE;
