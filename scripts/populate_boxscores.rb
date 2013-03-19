@@ -8,6 +8,7 @@ teams = DB[:teams]
 players = DB[:players]
 boxscores = DB[:boxscores]
 
+boxscores.delete
 players.each do |player|
   next if boxscores.filter(:player_id => player[:id]).count > 0
   next if teams.filter(:id => player[:team_id]).first[:rpi].nil?

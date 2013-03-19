@@ -7,6 +7,7 @@ DB = Sequel.sqlite('players.sqlite')
 teams = DB[:teams]
 players = DB[:players]
 
+players.delete
 teams.each do |team|
   doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2013.html"))
   doc.css('table#roster tbody tr').each do |player|

@@ -5,6 +5,7 @@ require 'open-uri'
 
 DB = Sequel.sqlite('players.sqlite')
 teams = DB[:teams]
+teams.update(:rpi => nil)
 
 doc = Nokogiri::HTML(open("http://rivals.yahoo.com/ncaa/basketball/polls?poll=5"))
 doc.search('table#ysprankings-results-table tr').each_with_index do |row, rank|

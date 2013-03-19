@@ -5,6 +5,7 @@ require 'open-uri'
 
 teams = Sequel.sqlite('players.sqlite')[:teams]
 
+teams.delete
 doc = Nokogiri::HTML(open('http://www.sports-reference.com/cbb/schools/'))
 doc.css('table#schools tr').each do |school|
   next unless school.search('td')[3] && school.search('td')[3].inner_html == '2013'
