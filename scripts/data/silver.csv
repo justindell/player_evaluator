@@ -1,0 +1,67 @@
+REGION,SEED,TEAM,ROUND OF 32,ROUND OF 16,ELITE 8,FINAL 4,FINALS,CHAMPIONS
+West,1,Gonzaga,98.20,73.2,52.4,33.4,13,5.6
+West,2,Ohio State,93.80,72.2,45.3,23.6,10.8,5.4
+West,3,New Mexico,87.40,49.7,22.3,9.3,2.5,0.8
+West,4,Kansas State,76.20,36.8,11.6,4.8,1.3,0.4
+West,5,Wisconsin,75.60,47.5,19,9.5,3.4,1.4
+West,6,Arizona,71.70,38.1,18.2,8.1,2,0.6
+West,7,Notre Dame,60.00,17.3,7.3,2.4,0.7,0.2
+West,8,Pittsburgh,62.10,18.6,10.1,4.7,1.7,0.7
+West,9,Wichita State,37.90,8.1,3.5,1.3,0.3,0.1
+West,10,Iowa State,40.00,8.8,3.5,1.1,0.3,0.1
+West,11,Belmont,28.30,9.7,2.7,0.7,0.2,0.1
+West,12,Mississippi,24.40,9.5,2,0.6,0.1,0.1
+West,13,La Salle,11.30,2.7,0.5,0.1,0.1,0.1
+West,13,Boise State,12.60,3.5,0.9,0.3,0.1,0.1
+West,14,Harvard,12.60,2.5,0.4,0.1,0.1,0.1
+West,15,Iona,6.20,1.6,0.3,0.1,0.1,0.1
+West,16,Southern University,1.80,0.2,0.1,0.1,0.1,0.1
+South,1,Kansas,98.20,81.6,55.1,31.7,16.5,7.9
+South,2,Georgetown,89.70,67,20.1,6.9,2.6,0.9
+South,3,Florida,94.80,78.6,61.7,37.1,23,13.2
+South,4,Michigan,90.20,65.1,27.3,12.7,5.9,2.5
+South,5,Virginia Commonwealth,71.10,26,8.5,3.2,1.3,0.5
+South,6,UCLA,38.10,5.9,2.4,0.6,0.1,0.1
+South,7,San Diego State,56.10,17.7,4.7,1.4,0.4,0.1
+South,8,North Carolina,67.00,14.2,6.4,2.4,1,0.4
+South,9,Villanova,33.00,4,1.2,0.3,0.1,0.1
+South,10,Oklahoma,43.90,11.9,3.1,0.9,0.2,0.1
+South,11,Minnesota,61.90,13.9,7.2,2.4,0.8,0.2
+South,12,Akron,28.90,6.1,1,0.2,0.1,0.1
+South,13,South Dakota State,9.80,2.8,0.4,0.1,0.1,0.1
+South,14,Northwestern State,5.20,1.6,0.4,0.1,0.1,0.1
+South,15,Florida Gulf Coast,10.30,3.3,0.4,0.1,0.1,0.1
+South,16,Western Kentucky,1.80,0.3,0.1,0.1,0.1,0.1
+Midwest,1,Louisville,99.50,85.5,73.1,53,38.5,23.8
+Midwest,2,Duke,94.60,69.6,43.8,18.4,11.6,6
+Midwest,3,Michigan State,83.00,58.4,28.6,10.6,5.5,2.3
+Midwest,4,Saint Louis,76.20,42.6,10.5,4.6,2.1,0.8
+Midwest,5,Oklahoma State,60.50,32.4,6.1,2.2,0.9,0.3
+Midwest,6,Memphis,58.80,22.3,8.4,2.3,1.1,0.4
+Midwest,7,Creighton,58.50,18.6,9.2,2.8,1.3,0.5
+Midwest,8,Colorado State,36.60,3.8,1.9,0.6,0.2,0.1
+Midwest,9,Missouri,63.40,10.7,6.5,2.8,1.3,0.5
+Midwest,10,Cincinnati,41.50,10.7,4.7,1.3,0.5,0.2
+Midwest,11,Saint Mary,41.20,13,3.8,0.8,0.3,0.1
+Midwest,12,Oregon,39.50,17.5,1.4,0.3,0.1,0.1
+Midwest,13,New Mexico State,23.80,7.5,0.5,0.1,0.1,0.1
+Midwest,14,Valparaiso,17.00,6.3,1.5,0.3,0.1,0.1
+Midwest,15,Albany,5.40,1.1,0.2,0.1,0.1,0.1
+Midwest,16,North Carolina A&T,0.50,0.1,0.1,0.1,0.1,0.1
+East,1,Indiana,98.50,83.5,65.4,52.3,31.7,18.4
+East,2,Miami (FL),89.90,61.6,37.7,12.6,4.9,1.8
+East,3,Marquette,65.50,39.6,20.8,6,1.9,0.6
+East,4,Syracuse,87.40,48.6,17.6,11.7,4.7,1.8
+East,5,UNLV,67.20,36.2,6.6,3,0.8,0.2
+East,6,Butler,62.70,30.4,13.6,3.2,0.8,0.2
+East,7,Illinois,50.40,18.2,8,1.7,0.4,0.1
+East,8,North Carolina State,70.10,13.4,7.8,4.7,1.7,0.6
+East,9,Temple,29.90,2.8,1.2,0.6,0.1,0.1
+East,10,Colorado,49.60,17.7,6.8,1.2,0.2,0.1
+East,11,Bucknell,37.30,13.9,6,1.3,0.3,0.1
+East,12,California,32.80,12.8,1.2,0.4,0.1,0.1
+East,13,Montana,12.60,2.4,0.1,0.1,0.1,0.1
+East,14,Davidson,34.50,16,6.6,1.4,0.3,0.1
+East,15,Pacific,10.10,2.6,0.5,0.1,0.1,0.1
+East,16,Long Island,0.70,0.1,0.1,0.1,0.1,0.1
+East,16,James Madison,0.80,0.1,0.1,0.1,0.1,0.1

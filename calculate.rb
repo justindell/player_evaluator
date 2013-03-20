@@ -17,7 +17,8 @@ class Calculate
                             :players__drafted.as(:drafted),
                             :teams__name.as(:team),
                             :teams__rpi.as(:team_rpi),
-                            :teams__seed.as(:seed)).
+                            :teams__seed.as(:seed),
+                            :teams__expected_games.as(:silver_games)).
                     select_more{[avg(:boxscores__points).as(:points), count(:boxscores__points).as(:games)]}.
                     group(:players__name, :players__drafted, :teams__name).
                     having{count(:boxscores__points) >= min_games.to_i}.

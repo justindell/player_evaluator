@@ -17,6 +17,7 @@ DB.create_table :teams do
   String :reference_id, :unique => true
   Integer :rpi
   Integer :seed
+  Decimal :expected_games
 end
 
 DB.create_table :games do

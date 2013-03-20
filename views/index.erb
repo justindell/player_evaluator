@@ -15,9 +15,11 @@
       <th>RPI</th>
       <th>Team</th>
       <th>Points</th>
-      <th>ExPts</th>
       <th>Games</th>
+      <th>ExPts</th>
+      <th>SilverPts</th>
       <th>ExGames</th>
+      <th>SilverGames</th>
       <th></th>
     </thead>
     <tbody>
@@ -27,9 +29,11 @@
           <td><%= result[:team_rpi] %></td>
           <td><%= "(#{result[:seed]}) #{result[:team]}" %></td>
           <td><%= sprintf("%0.3f", result[:points]) %></td>
-          <td><%= sprintf("%0.3f", result[:expected_points]) %></td>
           <td><%= result[:games] %></td>
+          <td><%= sprintf("%0.3f", result[:expected_points]) %></td>
+          <td><%= sprintf("%0.3f", result[:silver_points]) %></td>
           <td><%= sprintf("%0.3f", @games_per_seed[result[:seed]]) %></td>
+          <td><%= sprintf("%0.3f", result[:silver_games]) %></td>
           <td>
             <% unless result[:drafted] %>
               <form class= "draft" action="draft" method="post">
@@ -64,7 +68,7 @@
 
   $(document).ready(function() { 
     $("#players").tablesorter({headers: { 7: { sorter: false }}});
-    sortwithcolor(5);
+    sortwithcolor(7);
     $("th").click(function() {
       $(this).siblings().css("background-color","#cccccc").end().css("background-color","#dd0000");
       sortwithcolor( $(this).parent().children().index( this ) + 1 );
