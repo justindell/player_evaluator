@@ -11,7 +11,7 @@ boxscores = DB[:boxscores]
 boxscores.delete
 players.each do |player|
   next if boxscores.filter(:player_id => player[:id]).count > 0
-  next if teams.filter(:id => player[:team_id]).first[:rpi].nil?
+  next if teams.filter(:id => player[:team_id]).first[:seed].nil?
   puts "adding box scores for #{player[:name]}"
   begin
     doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/players/#{player[:reference_id]}/gamelog/2013/"))

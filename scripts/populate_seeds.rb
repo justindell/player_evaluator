@@ -82,7 +82,6 @@ teams.filter(:name =>  "Pacific Tigers"                    ).update(:seed => 15)
 teams.filter(:name =>  "Iona Gaels"                        ).update(:seed => 15)
 
 teams.filter(:name =>  "North Carolina A&amp;T Aggies"     ).update(:seed => 16)
-teams.filter(:name =>  "Liberty Flames"                    ).update(:seed => 16)
 teams.filter(:name =>  "Western Kentucky Hilltoppers"      ).update(:seed => 16)
 teams.filter(:name =>  "James Madison Dukes"               ).update(:seed => 16)
 teams.filter(:name =>  "Long Island University Blackbirds" ).update(:seed => 16)
