@@ -14,23 +14,26 @@ end
 DB.create_table :teams do
   primary_key :id
   String :name
+  String :alternate_name
   String :reference_id, :unique => true
   Integer :rpi
   Integer :seed
+  Decimal :win_percentage
   Decimal :expected_games
 end
 
 DB.create_table :games do
   primary_key :id
-  String :reference_id, :unique => true
-  Integer :home_team
-  Integer :away_team
+  foreign_key :team_id
+  foreign_key :opponent_id, :teams
+  Integer :score
+  Integer :opponent_score
+  String :location
 end
 
 DB.create_table :boxscores do
   primary_key :id
   foreign_key :player_id
-  foreign_key :game_id
   foreign_key :opponent_id, :teams
   String :result
   Integer :points
