@@ -7,7 +7,7 @@ DB = Sequel.sqlite('players.sqlite')
 teams = DB[:teams]
 teams.update(:rpi => nil)
 
-doc = Nokogiri::HTML(open("http://rivals.yahoo.com/ncaa/basketball/polls?poll=5"))
+doc = Nokogiri::HTML(open("http://sports.yahoo.com/ncaa/basketball/polls?poll=5"))
 doc.search('table#ysprankings-results-table tr').each_with_index do |row, rank|
   next if rank == 0
   team = row.search('td')[1].search('a').inner_html.gsub('.', '').gsub("'", "")

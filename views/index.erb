@@ -33,7 +33,7 @@
           <td><%= sprintf("%0.3f", result[:expected_points]) %></td>
           <td><%= sprintf("%0.3f", result[:silver_points]) %></td>
           <td><%= sprintf("%0.3f", @games_per_seed[result[:seed]]) %></td>
-          <td><%= sprintf("%0.3f", result[:silver_games]) %></td>
+          <td><%= sprintf("%0.3f", result[:silver_games] || 0) %></td>
           <td>
             <% unless result[:drafted] %>
               <form class= "draft" action="draft" method="post">

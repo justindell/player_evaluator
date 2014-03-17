@@ -67,4 +67,4 @@ DB.add_index :players, :id
 DB.add_index :teams, :id
 DB.add_index :games, :id
 DB.add_index :boxscores, :id
-DB.add_index :boxscores, [:player_id, :game_id], :unique => true
+DB.add_index :boxscores, [:player_id]

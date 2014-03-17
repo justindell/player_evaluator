@@ -14,13 +14,13 @@ players.each do |player|
   next if teams.filter(:id => player[:team_id]).first[:seed].nil?
   puts "adding box scores for #{player[:name]}"
   begin
-    doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/players/#{player[:reference_id]}/gamelog/2013/"))
+    doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/players/#{player[:reference_id]}/gamelog/2014/"))
     doc.css('table#gamelog tbody tr').each do |log|
       next if log.search('td a')[2].nil? 
       opponent_id = teams.first(:reference_id => log.search('td a')[2][:href].split('/')[3])[:id]
       tds = log.search('td')
       result = tds[6].inner_html
-      points = tds[26].inner_html.to_i
+      points = tds[29].inner_html.to_i
       boxscores.insert(:player_id => player[:id], :opponent_id => opponent_id, :result => result, :points => points)
     end
   rescue Exception => e
