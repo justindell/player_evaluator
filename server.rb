@@ -21,6 +21,7 @@ get '/' do
     p[:expected_points] = @games_per_seed[p[:seed]] * p[:points]
     p[:silver_points] = p[:points] * (p[:silver_games] || 0)
   end
+  @ppg.sort!{|a,b| b[:silver_points] <=> a[:silver_points]}
 
   erb :index
 end
