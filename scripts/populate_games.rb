@@ -14,16 +14,16 @@ teams.each do |team|
     doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2014-schedule.html"))
     doc.css('table#schedule tbody tr').each do |log|
       tds = log.search('td')
-      next if tds[2].nil? || tds[2].inner_html != 'REG'
-      next if tds[4].search('a')[0].nil? 
-      opponent_id = teams.first(:reference_id => tds[4].search('a')[0][:href].split('/')[3])[:id]
-      location = case tds[3].inner_html
+      next if tds[4].nil? || !(tds[4].inner_html == 'REG' || tds[4].inner_html == 'CTOURN')
+      next if tds[6].search('a')[0].nil? 
+      opponent_id = teams.first(:reference_id => tds[6].search('a')[0][:href].split('/')[3])[:id]
+      location = case tds[5].inner_html
                    when '' then 'Home'
                    when 'N' then 'Neutral'
                    when '@' then 'Away'
-                   else raise "unknown game location #{tds[3].inner_html}"
+                   else raise "unknown game location #{tds[5].inner_html}"
                  end
-      games.insert(:team_id => team[:id], :opponent_id => opponent_id, :score => tds[7].inner_html.to_i, :opponent_score => tds[8].inner_html.to_i, :location => location)
+      games.insert(:team_id => team[:id], :opponent_id => opponent_id, :score => tds[9].inner_html.to_i, :opponent_score => tds[10].inner_html.to_i, :location => location)
     end
   rescue Exception => e
     puts e.message
@@ -77,4 +77,10 @@ teams.each do |team|
   oowp = oow / (oow + ool).to_f
 
   teams.where(:id => team[:id]).update(:rpi => (wp * 0.25) + (owp * 0.50) + (oowp * 0.25))
+end
+
+# TODO why is my rpi so different?
+teams.order(:rpi).reverse.each_with_index do |team, rpi|
+  puts "calculating rpi rank for #{team[:name]}"
+  teams.where(:id => team[:id]).update(:rpi_rank => rpi + 1)
 end

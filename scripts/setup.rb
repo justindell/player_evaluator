@@ -16,9 +16,11 @@ DB.create_table :teams do
   String :name
   String :alternate_name
   String :reference_id, :unique => true
-  Integer :rpi
   Integer :seed
-  Decimal :win_percentage
+  Integer :rpi_rank
+  Decimal :rpi
+  Decimal :wins
+  Decimal :losses
   Decimal :expected_games
 end
 

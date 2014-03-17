@@ -9,14 +9,14 @@ class Calculate
       min_games = opts['min_games'].empty? ? 0 : opts['min_games']
       seed = opts['seed'].empty? ? 16 : opts['seed']
       seed_join = opts['team_id'].empty? ? lambda{|t,b,js| :seed.qualify(t) <= seed} : lambda{|t,b,js| {:id.qualify(t) => opts['team_id']}}
-      team_join = opts['opponent_rpi'].empty? ? lambda{|o,b,js| {1 => 1}} : lambda{|o,b,js| :rpi.qualify(o) <= opponent_rpi}
+      team_join = opts['opponent_rpi'].empty? ? lambda{|o,b,js| {1 => 1}} : lambda{|o,b,js| :rpi_rank.qualify(o) <= opponent_rpi}
       draft_filter = opts['hide_drafted'].nil? ? {true => true}  : {:players__drafted => false}
 
       DB[:boxscores].select(:players__id.as(:id),
                             :players__name.as(:player),
                             :players__drafted.as(:drafted),
                             :teams__name.as(:team),
-                            :teams__rpi.as(:team_rpi),
+                            :teams__rpi_rank.as(:team_rpi),
                             :teams__seed.as(:seed),
                             :teams__expected_games.as(:silver_games)).
                     select_more{[avg(:boxscores__points).as(:points), count(:boxscores__points).as(:games)]}.
