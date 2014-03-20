@@ -45,7 +45,7 @@ teams.filter(name: "Kentucky Wildcats"                ).update(seed: 8)
 teams.filter(name: "Memphis Tigers"                   ).update(seed: 8)
 
 teams.filter(name: "Oklahoma State Cowboys"           ).update(seed: 9)
-teams.filter(name: "Pittsburg Panthers"               ).update(seed: 9)
+teams.filter(name: "Pittsburgh Panthers"              ).update(seed: 9)
 teams.filter(name: "George Washington Colonials"      ).update(seed: 9)
 teams.filter(name: "Kansas State Wildcats"            ).update(seed: 9)
 
