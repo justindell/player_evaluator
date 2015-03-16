@@ -15,7 +15,7 @@ teams.each do |team|
     doc.css('table#schedule tbody tr').each do |log|
       tds = log.search('td')
       next if tds[4].nil? || !(tds[4].inner_html == 'REG' || tds[4].inner_html == 'CTOURN')
-      next if tds[6].search('a')[0].nil? 
+      next if tds[6].search('a')[0].nil?
       opponent_id = teams.first(:reference_id => tds[6].search('a')[0][:href].split('/')[3])[:id]
       location = case tds[5].inner_html
                    when '' then 'Home'

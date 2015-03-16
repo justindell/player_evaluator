@@ -16,9 +16,7 @@
       <th>Team</th>
       <th>Points</th>
       <th>Games</th>
-      <th>ExPts</th>
       <th>SilverPts</th>
-      <th>ExGames</th>
       <th>SilverGames</th>
       <th></th>
     </thead>
@@ -30,9 +28,7 @@
           <td><%= "(#{result[:seed]}) #{result[:team]}" %></td>
           <td><%= sprintf("%0.3f", result[:points]) %></td>
           <td><%= result[:games] %></td>
-          <td><%= sprintf("%0.3f", result[:expected_points]) %></td>
           <td><%= sprintf("%0.3f", result[:silver_points]) %></td>
-          <td><%= sprintf("%0.3f", @games_per_seed[result[:seed]]) %></td>
           <td><%= sprintf("%0.3f", result[:silver_games] || 0) %></td>
           <td>
             <% unless result[:drafted] %>
@@ -66,9 +62,9 @@
     );
   }
 
-  $(document).ready(function() { 
-    $("#players").tablesorter({headers: { 7: { sorter: false }}});
-    sortwithcolor(7);
+  $(document).ready(function() {
+    $("#players").tablesorter({headers: { 6: { sorter: false }}});
+    sortwithcolor(6);
     $("th").click(function() {
       $(this).siblings().css("background-color","#cccccc").end().css("background-color","#dd0000");
       sortwithcolor( $(this).parent().children().index( this ) + 1 );
@@ -84,17 +80,17 @@
           return {
             value: item.name,
             id: item.id
-          }; 
+          };
         });
         $('#team_names').autocomplete({
           source: data,
           minLength: 1,
           select: function(event, ui) {
             $('#team_id').attr('value', ui.item.id);
-          }  
+          }
         });
-      }  
+      }
     });
   });
 </script>
-</html> 
+</html>
