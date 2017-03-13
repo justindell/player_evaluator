@@ -23,7 +23,7 @@
     <tbody>
       <% @ppg.each_with_index do |result, idx| %>
         <tr id="<%= result[:id] %>" class="<%= " drafted" if result[:drafted] %>">
-          <td><%= "#{idx + 1}. #{result[:player]}" %></td>
+          <td><%= "#{result[:player]}" %></td>
           <td><%= result[:team_rpi] %></td>
           <td><%= "(#{result[:seed]}) #{result[:team]}" %></td>
           <td><%= sprintf("%0.3f", result[:points]) %></td>

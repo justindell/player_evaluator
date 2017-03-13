@@ -7,8 +7,8 @@ teams = Sequel.sqlite('players.sqlite')[:teams]
 
 teams.delete
 doc = Nokogiri::HTML(open('http://www.sports-reference.com/cbb/schools/'))
-doc.css('table#schools tr').each do |school|
-  next unless school.search('td')[3] && school.search('td')[3].inner_html == '2015'
+doc.css('table#schools tbody tr').each do |school|
+  next unless school.search('td')[3] && school.search('td')[3].inner_html == '2017'
   school_id = school.search('td a')[0][:href].split('/').last
   school_name = school.search('td a')[0].inner_html
   teams.insert(:name => school_name, :reference_id => school_id)

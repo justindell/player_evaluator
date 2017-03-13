@@ -9,10 +9,10 @@ players = DB[:players]
 
 players.delete
 teams.each do |team|
-  doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2015.html"))
+  doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2017.html"))
   doc.css('table#roster tbody tr').each do |player|
-    player_id = player.search('td a')[0][:href].split('/').last.gsub('.html', '')
-    name = player.search('td a')[0].inner_html
+    player_id = player.search('th a')[0][:href].split('/').last.gsub('.html', '')
+    name = player.search('th a')[0].inner_html
     players.insert(:name => name, :reference_id => player_id, :team_id => team[:id])
     puts "added #{name}"
   end

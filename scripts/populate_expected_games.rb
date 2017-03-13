@@ -1,16 +1,18 @@
 require 'rubygems'
 require 'sequel'
-require 'json'
+require 'csv'
 
 
 DB = Sequel.sqlite('players.sqlite')
 teams = DB[:teams]
-odds = JSON.parse(File.read('scripts/data/silver.json'))
+odds = CSV.open('scripts/data/fivethirtyeight_ncaa_forecasts.csv', headers: true)
 
-teams.update(:expected_games => nil, :seed => nil)
+#teams.update(:expected_games => nil, :seed => nil)
 odds.each do |row|
   name = row["team_name"]
-  records = teams.filter("name like '#{name}%' or alternate_name like '#{name}%'").all
+  next unless name == 'Fresno State'
+  #records = teams.filter("name like '#{name}%' or alternate_name like '#{name}%'").all
+  records = teams.filter(id: 94).all
   if records.count > 1
     reference = teams.filter(:reference_id => name.downcase)
     if reference.count == 1
