@@ -7,12 +7,10 @@ DB = Sequel.sqlite('players.sqlite')
 teams = DB[:teams]
 odds = CSV.open('scripts/data/fivethirtyeight_ncaa_forecasts.csv', headers: true)
 
-#teams.update(:expected_games => nil, :seed => nil)
+teams.update(:expected_games => nil, :seed => nil)
 odds.each do |row|
   name = row["team_name"]
-  next unless name == 'Fresno State'
-  #records = teams.filter("name like '#{name}%' or alternate_name like '#{name}%'").all
-  records = teams.filter(id: 94).all
+  records = teams.filter("name like '#{name}%' or alternate_name like '#{name}%'").all
   if records.count > 1
     reference = teams.filter(:reference_id => name.downcase)
     if reference.count == 1

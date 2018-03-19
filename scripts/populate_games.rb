@@ -11,20 +11,22 @@ games.delete
 teams.each do |team|
   puts "adding games for #{team[:name]}"
   begin
-    doc = Nokogiri::HTML(open("http://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2014-schedule.html"))
+    doc = Nokogiri::HTML(open("https://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2018-schedule.html"))
     doc.css('table#schedule tbody tr').each do |log|
       tds = log.search('td')
-      next if tds[4].nil? || !(tds[4].inner_html == 'REG' || tds[4].inner_html == 'CTOURN')
-      next if tds[6].search('a')[0].nil?
-      opponent_id = teams.first(:reference_id => tds[6].search('a')[0][:href].split('/')[3])[:id]
-      location = case tds[5].inner_html
+      next if tds[3].nil? || !(tds[3].inner_html == 'REG' || tds[3].inner_html == 'CTOURN')
+      next if tds[5].search('a')[0].nil?
+      opponent_id = teams.first(:reference_id => tds[5].search('a')[0][:href].split('/')[3])[:id]
+      location = case tds[4].inner_html
                    when '' then 'Home'
                    when 'N' then 'Neutral'
                    when '@' then 'Away'
                    else raise "unknown game location #{tds[5].inner_html}"
                  end
-      games.insert(:team_id => team[:id], :opponent_id => opponent_id, :score => tds[9].inner_html.to_i, :opponent_score => tds[10].inner_html.to_i, :location => location)
+      print '.'
+      games.insert(:team_id => team[:id], :opponent_id => opponent_id, :score => tds[8].inner_html.to_i, :opponent_score => tds[9].inner_html.to_i, :location => location)
     end
+    puts
   rescue Exception => e
     puts e.message
     puts e.backtrace

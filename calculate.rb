@@ -12,6 +12,21 @@ class Calculate
       team_join = opts['opponent_rpi'].empty? ? lambda{|o,b,js| {1 => 1}} : lambda{|o,b,js| Sequel.qualify(o, :rpi_rank) <= opponent_rpi}
       draft_filter = opts['hide_drafted'].nil? ? {true => true}  : {:players__drafted => false}
 
+      puts DB[:boxscores].select(:players__id___id,
+                            :players__name___player,
+                            :players__drafted___drafted,
+                            :teams__name___team,
+                            :teams__rpi_rank___team_rpi,
+                            :teams__seed___seed,
+                            :teams__expected_games___silver_games).
+                    select_more{[avg(:boxscores__points).as(:points), count(:boxscores__points).as(:games)]}.
+                    group(:players__name, :players__drafted, :teams__name).
+                    having{count(:boxscores__points) >= min_games.to_i}.
+                    order{avg(:boxscores__points).desc}.
+                    join(:teams, {:id => :opponent_id}, {:table_alias => :opponents}) {|o,b,js| team_join.call(o,b,js)}.
+                    join(:teams, :id => :players__team_id) {|t,b,js| seed_join.call(t,b,js)}.
+                    join(:players, :id => :boxscores__player_id).
+                    where(draft_filter).sql
       DB[:boxscores].select(:players__id___id,
                             :players__name___player,
                             :players__drafted___drafted,
