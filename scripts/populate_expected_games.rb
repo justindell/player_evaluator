@@ -10,7 +10,7 @@ odds = CSV.open('scripts/data/fivethirtyeight_ncaa_forecasts.csv', headers: true
 teams.update(:expected_games => nil, :seed => nil)
 odds.each do |row|
   name = row["team_name"]
-  records = teams.filter("name like '#{name}%' or alternate_name like '#{name}%'").all
+  records = teams.where(Sequel.like(:name, "#{name}%")).or(Sequel.like(:alternate_name, "#{name}%")).all
   if records.count > 1
     reference = teams.filter(:reference_id => name.downcase)
     if reference.count == 1

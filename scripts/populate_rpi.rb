@@ -12,7 +12,7 @@ doc.search('table.datatable tbody tr').each do |row|
   rank = row.search('td')[0].inner_html
   team = row.search('td')[1].search('a').inner_html.gsub('.', '').gsub("'", "")
   puts "#{rank}. finding RPI for #{team}"
-  records = teams.filter("name like '#{team}%' or alternate_name like '#{team}%'").all
+  records = teams.where(Sequel.like(:name, "#{team}%")).or(Sequel.like(:alternate_name, "#{team}%")).all
   team_id = 0
   if records.count > 1
     reference = teams.filter(:reference_id => team.downcase)

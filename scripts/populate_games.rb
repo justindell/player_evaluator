@@ -11,7 +11,7 @@ games.delete
 teams.each do |team|
   puts "adding games for #{team[:name]}"
   begin
-    doc = Nokogiri::HTML(open("https://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2018-schedule.html"))
+    doc = Nokogiri::HTML(open("https://www.sports-reference.com/cbb/schools/#{team[:reference_id]}/2019-schedule.html"))
     doc.css('table#schedule tbody tr').each do |log|
       tds = log.search('td')
       next if tds[3].nil? || !(tds[3].inner_html == 'REG' || tds[3].inner_html == 'CTOURN')

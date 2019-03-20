@@ -1,5 +1,7 @@
 require 'sequel'
 
+Sequel.split_symbols = true
+
 class Calculate
   DB = Sequel.sqlite('players.sqlite')
 
